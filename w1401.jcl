@@ -87,7 +87,7 @@
         LCLC &CONSOLE
         LCLC &TAPE
         LCLC &MB
-&CONSOLE SETC 'N'
+&CONSOLE SETC 'Y'
 &TAPE    SETC 'N'
 &MB      SETC 'Y'                                
        EJECT                                                            00004600
@@ -2160,6 +2160,7 @@ TESTA    STM   13,15,MACREGSV  SAVE MACRO REG                           00204200
 SNDILG   XC    RQSTIN,RQSTIN   ZERO OUT REPLY AREA                      00211000
          MSG   'A004 ILLEGAL ENTRY',A004                                   21790
          B     WTORTN
+BASE2    DC    A(SETBS1+4096)  
          SPACE
 *      THIS SECTION WILL SIMULATE THE START PUSHBUTTON.  IF THE         00213000
 *      OPERATOR COMMAND STT IS FOLLOWED BY AN ADDRESS, THE 1401 PROGRAM 00213100
