@@ -2353,7 +2353,7 @@ WTOWTO   WTO   '                                                       X
          LA    4,4(5,4)
          N     4,=X'FFFFFFFE'
          BR    4
-WTOMVC   MVC   SYSPBUFF+27(0),2(6)
+WTOMVC   MVC   SYSPBUFF+27(0),2(4)
          SPACE
 *      THIS ROUTINE WILL TERMINATE THE SIMULATOR UPON THE OPERATOR
 *      ENTRY 'TRM'.
