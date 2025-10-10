@@ -87,7 +87,7 @@
         LCLC &CONSOLE
         LCLC &TAPE
         LCLC &MB
-&CONSOLE SETC 'Y'
+&CONSOLE SETC 'N'
 &TAPE    SETC 'N'
 &MB      SETC 'Y'                                
        EJECT                                                            00004600
@@ -630,9 +630,10 @@ H1       LR    5,10              CONVERT I ADDRESS                      00056300
          MSG   'I003 HALT  I      , A      , B      ',I003
          AIF   ('&CONSOLE' EQ 'Y').HWTO2
 H2       B     TERMINAT
+         AGO   .HWTO3
 .HWTO2   ANOP
 H2       CH    9,=H'4'                                                  00057900
-       BNE     H3                                                       00058000
+.HWTO3 BNE     H3                                                       00058000
        LA      6,1(10)                                                  00058100
        BAL     8,CVAD43                                                 00058200
        ST      5,ADR360                                                 00058300
@@ -2103,6 +2104,7 @@ CLEAR    XC    0(256,2),0(2)   AREA
 .QTL     ANOP
          B     CDLOAD
 WTORTN   B     TERMINAT
+BASE2    DC    A(SETBS1+4096)  
          SPACE
 .YESCNSL       ANOP
          TITLE 'C O N S O L E    C O M M A N D    S U P P O R T'
@@ -2158,7 +2160,6 @@ TESTA    STM   13,15,MACREGSV  SAVE MACRO REG                           00204200
 SNDILG   XC    RQSTIN,RQSTIN   ZERO OUT REPLY AREA                      00211000
          MSG   'A004 ILLEGAL ENTRY',A004                                   21790
          B     WTORTN
-BASE2    DC    A(SETBS1+4096)  
          SPACE
 *      THIS SECTION WILL SIMULATE THE START PUSHBUTTON.  IF THE         00213000
 *      OPERATOR COMMAND STT IS FOLLOWED BY AN ADDRESS, THE 1401 PROGRAM 00213100
