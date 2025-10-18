@@ -2,6 +2,7 @@
 //             '1401 EMULATOR',
 //             CLASS=A,
 //             MSGCLASS=A,
+//             MSGLEVEL=(1,1),
 //             USER=HERC01,PASSWORD=CUL8TR,
 //             REGION=1024K
 //*********************************************************************
@@ -11,8 +12,7 @@
 //* Desc: AN EMULATOR FOR THE IBM 1401 COMPUTER, IN BAL360 ASSEMBLY
 //*
 //********************************************************************
-//A1401    EXEC ASMFCG,PARM.ASM=(OBJ,NODECK),MAC1='SYS2.MACLIB',
-//             REGION.GO=1228K
+//A1401    EXEC ASMFCL,PARM.ASM=(OBJ,NODECK),MAC1='SYS2.MACLIB'
 //ASM.SYSIN     DD *
          MACRO
 &L       MSG   &M,&L2
@@ -88,7 +88,7 @@
         LCLC &TAPE
         LCLC &MB
 &CONSOLE SETC 'Y'
-&TAPE    SETC 'N'
+&TAPE    SETC 'Y'
 &MB      SETC 'Y'                                
        EJECT                                                            00004600
        START 0                                                             
@@ -2059,8 +2059,7 @@ SETBS1   L     14,BASE2          *                                      00201500
 .YESTO   ANOP
           AIF  ('&TAPE' EQ 'N').NOTO
          OPEN  (PRNTDCB,(OUTPUT),CARD,,PUNCHR,(OUTPUT),                X
-               TAPEDCB0,,TAPEDCB1,,TAPEDCB2,,TAPEDCB3,,TAPEDCB4,,      X
-               TAPEDCB5,,                                              X
+               TAPEDCB0,,                                              X
                SYSPDCB,(OUTPUT))
 .NOTO    ANOP
          LM    13,15,0(6)
@@ -2921,7 +2920,9 @@ TAPEAREA DC    A(SIMTAPE)        ADDRESS OF TAPE I/O BUFFER
          SPACE
 WTCCW1 CCW     X'63',1,X'60',1                                          00285800
 WTCCW2   CCW   1,SIMTAPE,X'20',0
-LDTCCW   CCW   X'63',0,X'60',1                                          00286000
+LDTCCW   CCW   X'A3',0,X'60',1                                          00286000
+         CCW   2,SIMTAPE,X'20',20000
+         CCW   2,SIMTAPE,X'20',25000
 RTCCW    CCW   0,0,X'60',1       READ TAPE                              00286200
 RTCCW1   CCW   2,SIMTAPE,X'20',25000
 WTMCCW   CCW   X'1F',0,X'20',1   WRITE TAPE MARK                        00286400
@@ -2976,9 +2977,22 @@ UCBWGT   DS    CL1
 UCBNAME  DS    CL3
          END   BEGIN
 /*
-//GO.CARDOUT DD DUMMY
-//GO.WRITE   DD SYSOUT=A,DCB=(RECFM=FM,BLKSIZE=133)
-//GO.SYSPRINT   DD SYSOUT=A,DCB=(RECFM=FM,BLKSIZE=133)
-//GO.CARDIN  DD *,DCB=BLKSIZE=80
+//LKED.SYSLMOD DD DSN=HERC01.TEST.LOADLIB(W1401),DISP=OLD
+//GO EXEC PGM=MVSDDT,PARM=W1401
+//STEPLIB DD DSN=HERC01.TEST.LOADLIB,DISP=OLD
+//#DDTCMD DD UNIT=610
+//#DDTDATA DD UNIT=611
+//SYSABEND DD SYSOUT=A
+//CARDOUT DD DUMMY
+//WRITE   DD SYSOUT=A,DCB=(RECFM=FM,BLKSIZE=133)
+//SYSPRINT   DD SYSOUT=A,DCB=(RECFM=FM,BLKSIZE=133)
+//TAPE1 DD UNIT=TAPE,LABEL=(1,NL),DISP=(MOD,KEEP),
+//            VOL=SER=D1401
+//TAPE2 DD DUMMY
+//TAPE3 DD DUMMY
+//TAPE4 DD DUMMY
+//TAPE5 DD DUMMY
+//TAPE6 DD DUMMY
+//CARDIN  DD *,DCB=BLKSIZE=80
 ,008015,022029,030037,048092L/048299M0802803081,055201,062066/332,073077,088/080
 ABCDEFGHIJKLMNOPQRSTUVWXYZ123456789    
