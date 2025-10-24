@@ -1,3 +1,9 @@
+//HERC01B JOB (1),'SIM1401 TOM BROWN',CLASS=A,MSGCLASS=A,
+//             MSGLEVEL=(1,1),
+//             USER=HERC01,PASSWORD=CUL8TR,
+//             REGION=1024K
+//STEP1 EXEC ASMFCLG PARM.ASM=(OBJ,NODECK),MAC1='SYS2.MACLIB'
+//ASM.SYSIN DD *
 *SIM1401  START 0                                                       00000100
 ***********************************************************************
 *                                                                     *
@@ -3221,3 +3227,11 @@ TAPEDCB9 DCB   MACRF=(E),DSORG=PS,DDNAME=TP9                            00247400
 SIMCOR   DSECT                                                          00308800
          DS    CL16020                                                  00308900
        END     BEGIN                                                    00309000
+/*
+//GO.WRITE DD SYSOUT=*
+//GO.CARDOUT DD DUMMY
+//GO.CARDIN  DD *,DCB=BLKSIZE=80
+,008015,022029,030037,048092L/048299M0802803081,055201,062066/332,073077,088/080
+ABCDEFGHIJKLMNOPQRSTUVWXYZ123456789    
+/*
+//
