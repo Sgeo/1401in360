@@ -1,8 +1,7 @@
-//HERC01B JOB (1),'SIM1401 TOM BROWN',CLASS=A,MSGCLASS=A,
+//B1401ASM JOB (1),'SIM1401 TOM BROWN',CLASS=A,MSGCLASS=A,
 //             MSGLEVEL=(1,1),
-//             USER=HERC01,PASSWORD=CUL8TR,
-//             REGION=1024K
-//STEP1 EXEC ASMFCLG PARM.ASM=(OBJ,NODECK),MAC1='SYS2.MACLIB'
+//             USER=HERC01,PASSWORD=CUL8TR
+//STEP1 EXEC ASMFCL PARM.ASM=(OBJ,NODECK),MAC1='SYS2.MACLIB'
 //ASM.SYSIN DD *
 *SIM1401  START 0                                                       00000100
 ***********************************************************************
@@ -3228,17 +3227,5 @@ SIMCOR   DSECT                                                          00308800
          DS    CL16020                                                  00308900
        END     BEGIN                                                    00309000
 /*
-//GO.WRITE DD SYSOUT=*
-//GO.CARDOUT DD DUMMY
-//GO.CARDIN  DD *,DCB=BLKSIZE=80
-----+----1----+----2----+----3----+----4----+----5----+----6----+----7----+----8
-,008015,022029,033033N      1001                 HELLO WORLD PROGRAM   HELLO 005
-L039406,400404,405406N      1001/322/22                                HELLO 010
-L046420,407414,415419,4204201001M5762532/25322                         HELLO 015
-L044432,421428,429429N      1001M5882802/280                           HELLO 020
-L047447,433440,441445,4464471001M6002802/2802.                         HELLO 025
-M058576,550550N      N      1001H E L L O    W O R L D                 HELLO 030
-M044588,577577N      N      1001RAFA PEREIRA                           HELLO 035
-M044600,589589N      N      B400AUGUST, 2007                           HELLO 040
-/*
+//LKED.SYSLMOD DD DSN=SYS2.LINKLIB(B1401) DISP=OLD
 //
