@@ -2169,7 +2169,7 @@ DGCC7    EQU   *                                                        00212100
          GET   CARD,TMPARA                                              00212300
          LM    13,15,0(6)                                               00212400
          B     CHGA                                                     00212500
-MOD      DC    X'00'                                                    00212600
+MOD      DC    X'FF'                                                    00212600
 WTECB    DC    F'0'                                                     00212700
 BGN1     STM   13,15,MACREGSV  SAVE MACRO REGS                          00212800
          LA    6,MACREGSV      SAVE ADDRESS TO XR                       00212900
